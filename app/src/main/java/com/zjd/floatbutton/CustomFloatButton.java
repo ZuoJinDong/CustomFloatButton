@@ -16,13 +16,12 @@ import com.zjd.floatbutton.util.DensityUtil;
 import com.zjd.floatbutton.util.Util;
 
 /**
- * Created by XZTX-Android on 2017/8/28.
+ * Created by 左金栋 on 2017/8/28.
  */
 
 public class CustomFloatButton extends View {
     private Context context;
     private Paint paintMainBtn,paintContent,paintFloat,paintText;
-    private TextPaint textPaint;
 
     private int border;
     private int width;//设置高
@@ -38,19 +37,13 @@ public class CustomFloatButton extends View {
     public CustomFloatButton(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.context=context;
-        initAttrs(attrs);
         initPaint();
     }
 
     public CustomFloatButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context=context;
-        initAttrs(attrs);
         initPaint();
-    }
-
-    private void initAttrs(AttributeSet attrs) {
-
     }
 
     @Override
