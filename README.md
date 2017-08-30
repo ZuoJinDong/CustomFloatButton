@@ -6,4 +6,4 @@
   
   ![微信](https://github.com/ZuoJinDong/GIF/blob/master/WeChat.jpg)  
   
-  ![](https://github.com/ZuoJinDong/GIF/blob/master/chart.gif)  
+  ![](https://github.com/ZuoJinDong/GIF/blob/master/CustomFloatButton.gif)  
