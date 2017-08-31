@@ -2,11 +2,14 @@ package com.zjd.floatbutton;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.Nullable;
-import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,6 +17,9 @@ import android.view.animation.OvershootInterpolator;
 
 import com.zjd.floatbutton.util.DensityUtil;
 import com.zjd.floatbutton.util.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 左金栋 on 2017/8/28.
@@ -27,23 +33,31 @@ public class CustomFloatButton extends View {
     private int width;//设置高
     private int height;//设置高
 
+    private int FloatType=0;
+    public static int Type_Circle=0;
+    public static int Type_Bitmap=1;
+
+    private List<Bitmap> bitmapList;
 
     public CustomFloatButton(Context context) {
         super(context);
         this.context=context;
         initPaint();
+        initData();
     }
 
     public CustomFloatButton(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.context=context;
         initPaint();
+        initData();
     }
 
     public CustomFloatButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context=context;
         initPaint();
+        initData();
     }
 
     @Override
@@ -93,7 +107,7 @@ public class CustomFloatButton extends View {
 
         paintFloat=new Paint();
         paintFloat.setAntiAlias(true);
-        paintFloat.setColor(Color.BLUE);
+        paintFloat.setColor(0xFF67C0FF);
         paintFloat.setStyle(Paint.Style.FILL_AND_STROKE);
         paintFloat.setShadowLayer(5,3,3,Color.DKGRAY);
 
@@ -105,6 +119,14 @@ public class CustomFloatButton extends View {
 
         setLayerType(LAYER_TYPE_SOFTWARE, null);
         shadowLayer=DensityUtil.dip2px(context,5);
+    }
+
+    private void initData() {
+        bitmapList=new ArrayList<>();
+        bitmapList.add(((BitmapDrawable)getResources().getDrawable(R.drawable.cake_72px)).getBitmap());
+        bitmapList.add(((BitmapDrawable)getResources().getDrawable(R.drawable.hamburger_72px)).getBitmap());
+        bitmapList.add(((BitmapDrawable)getResources().getDrawable(R.drawable.icecream_72px)).getBitmap());
+        bitmapList.add(((BitmapDrawable)getResources().getDrawable(R.drawable.watermelon_cuts_72px)).getBitmap());
     }
 
     private float circleX;
@@ -168,9 +190,14 @@ public class CustomFloatButton extends View {
                 btnX=(float)(circleX+Math.sin(2*Math.PI / 360*(i*30+90))*20*value);
                 btnY=(float)(circleY+Math.cos(2*Math.PI / 360*(i*30+90))*20*value);
             }
+
             canvas.drawCircle(btnX,btnY,(value/animValueSum)*border*5/11,paintFloat);
-            paintText.setTextSize(value/animValueSum*width/12);
-            canvas.drawText(i+"",btnX,btnY-border*5/11+getBaseLineY(paintText),paintText);
+            if(FloatType==Type_Circle){
+                paintText.setTextSize(value/animValueSum*width/12);
+                canvas.drawText(i+"",btnX,btnY-border*5/11+getBaseLineY(paintText),paintText);
+            }else if(FloatType==Type_Bitmap){
+                canvas.drawBitmap(bitmapList.get(i),new Rect(0,0,bitmapList.get(i).getWidth(),bitmapList.get(i).getHeight()),new RectF((int)(btnX-(value/animValueSum)*border*5/15),(int)(btnY-(value/animValueSum)*border*5/15),(int)(btnX+(value/animValueSum)*border*5/15),(int)(btnY+(value/animValueSum)*border*5/15)),paintContent);
+            }
         }
     }
 
@@ -338,5 +365,10 @@ public class CustomFloatButton extends View {
 
     public void setOnBtnClickListener(OnBtnClickListener listener){
         this.mOnBtnClickListener=listener;
+    }
+
+    public void setFloatType(int type){
+        FloatType=type;
+        invalidate();
     }
 }

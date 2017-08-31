@@ -18,9 +18,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
+            android:text="circle"
+            android:id="@+id/btn_circle"
+            android:onClick="onClick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
+            android:text="bitmap"
+            android:id="@+id/btn_bitmap"
+            android:onClick="onClick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button

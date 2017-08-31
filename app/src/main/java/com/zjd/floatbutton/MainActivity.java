@@ -26,4 +26,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_circle:
+                floatBtn.setFloatType(CustomFloatButton.Type_Circle);
+                break;
+            case R.id.btn_bitmap:
+                floatBtn.setFloatType(CustomFloatButton.Type_Bitmap);
+                break;
+        }
+    }
 }
