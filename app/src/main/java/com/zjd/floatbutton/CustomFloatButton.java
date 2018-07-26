@@ -23,6 +23,7 @@ import java.util.List;
 
 /**
  * Created by 左金栋 on 2017/8/28.
+ * 悬浮按钮
  */
 
 public class CustomFloatButton extends View {
