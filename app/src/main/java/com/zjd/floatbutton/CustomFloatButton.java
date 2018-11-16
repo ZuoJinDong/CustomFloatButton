@@ -80,10 +80,12 @@ public class CustomFloatButton extends View {
 
         animValueSum=border*3/22;
 
-        circleX=width-border;
-        circleY=height-border;
-        moveX=circleX;
-        moveY=circleY;
+        if(circleX == 0){
+            circleX=width-border;
+            circleY=height-border;
+            moveX=circleX;
+            moveY=circleY;
+        }
         setMeasuredDimension(width , height);//设置宽和高
 
     }
